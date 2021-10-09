@@ -5,6 +5,7 @@ logs
 node_modules
 test_output
 integration/test_logs
+yarn.lock
 *~
 .DS_Store
 .idea/
@@ -14,4 +15,3 @@ out/
 docs/
 .eslintcache
 .env
-yarn.lock
