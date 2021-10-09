@@ -14,14 +14,14 @@ class MoralisRPCProvider {
     if (!rpcUrl) throw new Error(ERROR_RPCURL_MISSING);
     let web3Provider;
 
+    const MWeb3 = typeof Web3 === 'function' ? Web3 : window.Web3;
     if (rpcUrl.includes('https://')) {
-      web3Provider = new Web3.providers.HttpProvider(rpcUrl, options);
+      web3Provider = new MWeb3.providers.HttpProvider(rpcUrl, options);
     } else if (rpcUrl.includes('wss://')) {
-      web3Provider = new Web3.providers.WebsocketProvider(rpcUrl, options);
+      web3Provider = new MWeb3.providers.WebsocketProvider(rpcUrl, options);
     } else {
       throw new Error(ERROR_RPCURL_MISSING);
     }
-    const MWeb3 = typeof Web3 === 'function' ? Web3 : window.Web3;
     this.web3 = new MWeb3(web3Provider);
     this.isActivated = true;
 
