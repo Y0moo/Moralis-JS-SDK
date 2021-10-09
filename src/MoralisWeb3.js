@@ -12,6 +12,7 @@ import TransferUtils from './TransferUtils';
 import { run } from './Cloud';
 import detectEthereumProvider from '@metamask/detect-provider';
 import createSigningData from './createSigningData';
+import MoralisRPCProvider from './MoralisRPCProvider';
 const EventEmitter = require('events');
 const transferEvents = new EventEmitter();
 
@@ -69,6 +70,10 @@ class MoralisWeb3 {
       case 'walletConnect':
       case 'wc':
         return MoralisWalletConnectProvider;
+      case 'rpc':
+      case 'RPC':
+      case 'Rpc':
+        return MoralisRPCProvider;
       default:
         return MoralisInjectedProvider;
     }
