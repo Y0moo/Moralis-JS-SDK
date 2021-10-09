@@ -1,4 +1,3 @@
-/* global window */
 import Web3 from 'web3';
 import Web3HttpProvider from 'web3-providers-http';
 import Web3WsProvider from 'web3-providers-ws';
