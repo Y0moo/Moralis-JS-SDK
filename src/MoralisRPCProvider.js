@@ -1,6 +1,5 @@
+/* global window */
 import Web3 from 'web3';
-import Web3HttpProvider from 'web3-providers-http';
-import Web3WsProvider from 'web3-providers-ws';
 
 const ERROR_RPCURL_MISSING =
   'Missing RPC URL. Check available speedy-nodes: https://admin.moralis.io/speedyNodes';
@@ -16,13 +15,14 @@ class MoralisRPCProvider {
     let web3Provider;
 
     if (rpcUrl.includes('https://')) {
-      web3Provider = new Web3HttpProvider(rpcUrl, options);
+      web3Provider = new Web3.providers.HttpProvider(rpcUrl, options);
     } else if (rpcUrl.includes('wss://')) {
-      web3Provider = new Web3WsProvider(rpcUrl, options);
+      web3Provider = new Web3.providers.WebsocketProvider(rpcUrl, options);
     } else {
       throw new Error(ERROR_RPCURL_MISSING);
     }
-    this.web3 = new Web3(web3Provider);
+    const MWeb3 = typeof Web3 === 'function' ? Web3 : window.Web3;
+    this.web3 = new MWeb3(web3Provider);
     this.isActivated = true;
 
     return this.web3;
